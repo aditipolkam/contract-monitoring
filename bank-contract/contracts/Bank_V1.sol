@@ -8,6 +8,9 @@ import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
     mapping(address => uint256) private balances;
 
+    event Deposit(address indexed _from, uint value);
+    event Withdraw(address indexed _receiver, uint value);
+
     function initialize(address initialOwner) public initializer {
         __Ownable_init(initialOwner);
         __Pausable_init();
@@ -16,6 +19,7 @@ contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
 
     function deposit() public payable whenNotPaused {
         balances[msg.sender] += msg.value;
+        emit Deposit(msg.sender, msg.value);
     }
 
     function withdraw(uint256 amount) public whenNotPaused {
@@ -26,6 +30,7 @@ contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
         require(sent, "Failed to send Ether");
 
         balances[msg.sender] -= amount;
+        emit Withdraw(msg.sender, amount);
     }
 
     function pause() public onlyOwner {

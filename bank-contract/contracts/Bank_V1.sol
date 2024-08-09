@@ -28,10 +28,6 @@ contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
         balances[msg.sender] -= amount;
     }
 
-    function getBalance() public view returns (uint256) {
-        return balances[msg.sender];
-    }
-
     function pause() public onlyOwner {
         _pause();
     }

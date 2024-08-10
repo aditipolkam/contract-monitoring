@@ -10,9 +10,13 @@ async function main() {
     contractAddress,
     deployer
   );
-  let tx = await bank.withdraw(ethers.parseEther("0.5"));
-  await tx.wait();
-  console.log(`Deployer withdrew 0.5 ETH`);
+
+  let tx1 = await bank.deposit({ value: ethers.parseEther("1.0") });
+  await tx1.wait();
+
+  let tx2 = await bank.withdraw();
+  await tx2.wait();
+  console.log(`Deployer withdrew 1 ETH`);
 }
 
 main().catch((error) => {

@@ -1,1 +1,0 @@
-const checkWithdrawalTransaction = async () => {};

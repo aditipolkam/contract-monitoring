@@ -1,10 +1,13 @@
+import { ContractFactory } from "ethers";
 import { ethers, upgrades } from "hardhat";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
   const ownerAddress = deployer.address;
 
-  const Bank_V1 = await ethers.getContractFactory("Bank_V1");
+  const Bank_V1 = (await ethers.getContractFactory(
+    "contracts/Bank_V1.sol:Bank_V1"
+  )) as ContractFactory;
 
   console.log("Deploying Bank_V1 contract...");
 

@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
-    mapping(address => uint256) private balances;
+    mapping(address => uint256) public balances;
 
     event Deposit(address indexed _from, uint value);
     event Withdraw(address indexed _receiver, uint value);
@@ -25,12 +25,16 @@ contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
     function withdraw(uint256 amount) public whenNotPaused {
         require(balances[msg.sender] >= amount, "Insufficient balance");
 
-        // Vulnerable code: updating the balance after sending funds
+        // vulnerable code: updating the balance after sending funds
         (bool sent, ) = msg.sender.call{value: amount}("");
         require(sent, "Failed to send Ether");
 
         balances[msg.sender] -= amount;
         emit Withdraw(msg.sender, amount);
+    }
+
+    function getBalance() public view returns (uint256) {
+        return balances[msg.sender];
     }
 
     function pause() public onlyOwner {

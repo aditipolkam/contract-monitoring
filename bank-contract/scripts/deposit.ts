@@ -11,7 +11,7 @@ async function main() {
     contractAddress,
     deployer
   );
-  let tx = await bank.deposit({ value: ethers.parseEther("50.0") });
+  let tx = await bank.deposit({ value: ethers.parseEther("1.0") });
   await tx.wait();
   console.log(`Deployer deposited 1 ETH`);
 
@@ -21,7 +21,7 @@ async function main() {
     contractAddress,
     signer1
   );
-  tx = await bank.deposit({ value: ethers.parseEther("20.0") });
+  tx = await bank.deposit({ value: ethers.parseEther("2.0") });
   await tx.wait();
   console.log(`Signer1 deposited 2 ETH`);
 

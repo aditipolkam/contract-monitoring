@@ -7,7 +7,7 @@ const contractName = "contracts/AttackBank.sol:AttackBank";
 
 async function main() {
   const signers = await hardhat.ethers.getSigners();
-  const signer = signers[1];
+  const signer = signers[2];
 
   const attackContract = await hardhat.ethers.getContractAt(
     contractName,
@@ -34,8 +34,6 @@ async function main() {
       gasLimit: "0x" + (2000000).toString(16),
     })
   ).wait();
-
-  // Without Gas Limit it won't work because it will run out of gas in the middle of the recursion
 
   // Print Summary
   console.log("Attack Done.");

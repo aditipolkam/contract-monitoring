@@ -1,5 +1,4 @@
 import { ethers } from 'ethers';
-// import { SEPOLIA_NODE } from '../config/constants';
 import ABI from '../data/BankAbi.json';
 import contractConfig from '../config/contract.config';
 
@@ -11,16 +10,29 @@ const pauseContract = async () => {
   try {
     const provider = new ethers.JsonRpcProvider(endPoint);
     const wallet = new ethers.Wallet(adminPrivateKey, provider);
+
+    // Fetch current nonce
+    const nonce = await provider.getTransactionCount(wallet.address);
+
     const contract = new ethers.Contract(contractAddress, ABI, wallet);
 
-    //estimate gas
+    // // Estimate gas
+    // const gasLimit = await contract.estimateGas();
+    // console.log(`Estimated gas: ${gasLimit.toString()}`);
 
-    const txn = await contract.pause();
+    // Send transaction with specific nonce
+    const txn = await contract.pause({
+      nonce: nonce,
+      gasLimit: '0x' + (2000000).toString(16),
+    });
+
+    console.log(`Transaction hash: ${txn.hash}`);
     const receipt = await txn.wait();
     console.log('Contract paused successfully.');
     return receipt;
   } catch (error) {
-    console.error('Error in transaction:', error);
+    const err = error as Error;
+    if (!err.message.includes('nonce has already been used')) console.error('Error in transaction:', error);
   }
 };
 

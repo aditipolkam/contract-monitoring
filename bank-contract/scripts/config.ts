@@ -6,6 +6,7 @@ const filepath = path.resolve(__dirname, "../../../global-config.json");
 interface ConfigData {
   bankContractAddress: string;
   attackContractAddress: string;
+  privateKey: string;
 }
 
 let configData: ConfigData = {} as ConfigData;

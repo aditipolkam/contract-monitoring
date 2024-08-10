@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import pauseContract from '../helpers/pauseContract';
 
 interface Balances {
   [address: string]: bigint;
@@ -17,10 +18,12 @@ export const handleDeposit = (from: string, value: number) => {
 export const handleWithdraw = (receiver: string, value: number) => {
   if (!balances[receiver]) {
     console.log(`Withdraw event detected but no balance record for ${receiver}. Possible attack!`);
+    pauseContract();
     return;
   }
   if (balances[receiver] === 0n) {
     console.log(`Withdraw event detected but balance is 0 for ${receiver}. Possible attack!`);
+    pauseContract();
     return;
   }
   balances[receiver] = balances[receiver] - BigInt(value);

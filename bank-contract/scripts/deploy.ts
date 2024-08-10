@@ -1,5 +1,6 @@
 import { ContractFactory } from "ethers";
 import { ethers, upgrades } from "hardhat";
+import config from "./config";
 
 async function main() {
   const [deployer] = await ethers.getSigners();
@@ -16,7 +17,10 @@ async function main() {
   });
   await v1contract.waitForDeployment();
 
-  console.log("Bank_V1 Contract deployed to:", await v1contract.getAddress());
+  const address = await v1contract.getAddress();
+  config.set({ bankContractAddress: address });
+
+  console.log("Bank_V1 Contract deployed to:", address);
 }
 
 main().catch((error) => {

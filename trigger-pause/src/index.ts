@@ -1,11 +1,14 @@
 import { ethers } from 'ethers';
 import ABI from './data/BankAbi.json';
-import { SEPOLIA_NODE } from './config/constants';
+// import { SEPOLIA_NODE } from './config/constants';
+import contractConfig from './config/contract.config';
 
-const contractAddress = '0xcd180A6F57EE9c2ee8751D6D87a17695290D063C';
+const endPoint = 'http://127.0.0.1:8545';
+
+const contractAddress = contractConfig.configData.bankContractAddress;
 
 async function main() {
-  const provider = new ethers.JsonRpcProvider(SEPOLIA_NODE);
+  const provider = new ethers.JsonRpcProvider(endPoint);
   const contract = new ethers.Contract(contractAddress, ABI, provider);
 
   contract.on('Deposit', async (from, value, event) => {

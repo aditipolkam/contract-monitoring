@@ -1,7 +1,8 @@
 import hardhat from "hardhat";
+import config from "./config";
 
-const bankAddress = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318";
-const maliciousContractAddress = "0xB7f8BC63BbcaD18155201308C8f3540b07f84F5e";
+const bankAddress = config.configData.bankContractAddress;
+const maliciousContractAddress = config.configData.attackContractAddress;
 const contractName = "contracts/AttackBank.sol:AttackBank";
 
 async function main() {

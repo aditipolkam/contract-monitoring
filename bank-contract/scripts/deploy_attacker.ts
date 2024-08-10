@@ -1,7 +1,7 @@
 import hardhat from "hardhat";
+import config from "./config";
 
-const bank_v1_contract = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318";
-
+const bank_v1_contract = config.configData.bankContractAddress;
 async function main() {
   const attackBankInstance = await hardhat.ethers.getContractFactory(
     "AttackBank"

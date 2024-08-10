@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
+import config from "./config";
 
-const contractAddress = "0x8A791620dd6260079BF849Dc5567aDC3F2FdC318";
-
+const contractAddress = config.configData.bankContractAddress;
 async function main() {
   const [deployer, signer1, signer2] = await ethers.getSigners();
 

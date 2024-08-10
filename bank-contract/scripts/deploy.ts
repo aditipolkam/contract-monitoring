@@ -1,12 +1,19 @@
-import hardhat from "hardhat";
+import { ethers, upgrades } from "hardhat";
 
 async function main() {
-  const bankContractInstance = await hardhat.ethers.getContractFactory(
-    "Bank_V1"
-  );
-  const deployedDontract = await bankContractInstance.deploy();
+  const [deployer] = await ethers.getSigners();
+  const ownerAddress = deployer.address;
 
-  console.log("Contract deployed to:", await deployedDontract.getAddress());
+  const Bank_V1 = await ethers.getContractFactory("Bank_V1");
+
+  console.log("Deploying Bank_V1 contract...");
+
+  const v1contract = await upgrades.deployProxy(Bank_V1, [ownerAddress], {
+    initializer: "initialize",
+  });
+  await v1contract.waitForDeployment();
+
+  console.log("Bank_V1 Contract deployed to:", await v1contract.getAddress());
 }
 
 main().catch((error) => {

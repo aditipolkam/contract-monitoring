@@ -22,15 +22,16 @@ contract Bank_V1 is Initializable, OwnableUpgradeable, PausableUpgradeable {
         emit Deposit(msg.sender, msg.value);
     }
 
-    function withdraw(uint256 amount) public whenNotPaused {
-        require(balances[msg.sender] >= amount, "Insufficient balance");
+    function withdraw() public whenNotPaused {
+        uint256 balance = balances[msg.sender];
 
-        // vulnerable code: updating the balance after sending funds
-        (bool sent, ) = msg.sender.call{value: amount}("");
-        require(sent, "Failed to send Ether");
+        // Send ETH
+        (bool success, ) = msg.sender.call{value: balance}("");
+        require(success, "Withdraw failed");
 
-        balances[msg.sender] -= amount;
-        emit Withdraw(msg.sender, amount);
+        // Update Balance
+        balances[msg.sender] = 0;
+        emit Withdraw(msg.sender, balance);
     }
 
     function getBalance() public view returns (uint256) {

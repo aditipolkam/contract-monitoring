@@ -3,11 +3,9 @@ import { EMAIL_TYPE } from '../interfaces/types';
 import emailService from '../services/email.service';
 
 const sendAlert = async (req: Request, res: Response) => {
-  const { type, message, to } = req.body;
-  console.log(to);
+  const { message, to, contractAddress } = req.body;
   try {
-    console.log('sending email');
-    const mailOptions = emailService.getMailOptions(to, EMAIL_TYPE.WARN);
+    const mailOptions = emailService.getMailOptions(to, EMAIL_TYPE.WARN, contractAddress, message);
 
     const send = await emailService.sendMessage(mailOptions);
     return res.status(200).json({ message: 'Ok', send });

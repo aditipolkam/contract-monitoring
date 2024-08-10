@@ -2,14 +2,34 @@ import { createTransport, TransportOptions, SentMessageInfo } from 'nodemailer';
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, ACCESS_TOKEN, REFRESH_TOKEN, FROM_EMAIL } from '../config/constants';
 import { IMailOptions, EMAIL_TYPE } from '../interfaces/types';
 
-const getMailOptions = (to_email: string, emailType: EMAIL_TYPE): IMailOptions => {
+const getMailOptions = (
+  to_email: string,
+  emailType: EMAIL_TYPE,
+  contractAddress: string,
+  issue: string,
+): IMailOptions => {
   const from_email = FROM_EMAIL;
   let subject = '';
   let text = '';
   switch (emailType) {
     case EMAIL_TYPE.WARN:
-      subject = `Warning: Your contract is at risk`;
-      text = 'lorem ipsum';
+      subject = `Urgent: Contract Security Alert`;
+      text = `
+      Greetings!,
+
+      Your smart contract has been flagged for potential security issues and has been paused temporarily.
+
+      **Contract Address:** ${contractAddress}
+      **Issue Detected:** ${issue}
+
+      **Actions to Take:**
+      1. Review recent transactions and contract code.
+      2. Consider deploying an upgrade.
+      3. Contact a security expert if needed.
+      4. Unpause the contract when fixed.
+
+      Regards!
+    `;
       break;
   }
 

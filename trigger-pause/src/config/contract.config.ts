@@ -7,6 +7,7 @@ interface ConfigData {
   bankContractAddress: string;
   attackContractAddress: string;
   privateKey: string;
+  ownerEmail: string;
 }
 
 let configData: ConfigData = JSON.parse(fs.readFileSync(filepath, 'utf-8'));

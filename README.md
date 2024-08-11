@@ -163,3 +163,11 @@ The `trigger-pause` service is a Node.js script that listens to blockchain event
 **Configuration:**
 
 - **config.json**: Contains configuration details for deploying contracts, including network settings contract addresses and names.
+
+Additionally, Slither can be integrated directly within the Hardhat project using the `slither .` command. However, due to the integration limitations with Python APIs and the Node.js environment of this project, it was unable to integrate Slither directly into the services.
+
+```bash
+python3 -m pip install slither-analyzer
+cd bank-contract
+slither .
+```

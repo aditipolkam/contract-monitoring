@@ -2,6 +2,10 @@
 
 This documentation outlines a comprehensive system designed to simulate, detect, and respond to security exploits within a banking smart contract environment.
 
+Try it yourself using the [Installtion Guide](/INSTALLATION.md).
+
+![workflow](/data/workflow.png)
+
 ## `bank-contract`
 
 **Overview:**
@@ -76,7 +80,7 @@ The `notification-service` is responsible for sending alert emails when called f
        ```json
        {
          "message": "Ok",
-         "send": <result of the email sending operation>
+         "send": true | false
        }
        ```
      - The `send` field contains the result of the email sending operation, which may include details of the sent email or any response from the email service.

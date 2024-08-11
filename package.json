@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "setup": "concurrently \"cd bank-contract && npm i\" \"cd notification-service && npm i && npm run build\" \"cd trigger-pause && npm i && npm run build\"",
-    "start": "concurrently \"cd bank-contract && npx hardhat node\" \"cd notification-service && npm start\" \"cd trigger-pause && npm start\""
+    "node": "cd bank-contract && npx hardhat node",
+    "setup": "concurrently \"cd bank-contract && npm i && npm run build\" \"cd notification-service && npm i && npm run build\" \"cd trigger-pause && npm i && npm run build\"",
+    "start": "concurrently \"cd notification-service && npm start\" \"cd trigger-pause && npm start\""
   },
   "keywords": [],
   "author": "",

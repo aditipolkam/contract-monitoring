@@ -7,6 +7,7 @@ Start by cloning the repository to your local machine:
 ```bash
 git clone https://github.com/aditipolkam/contract-monitoring.git
 cd contract-monitoring
+npm install
 ```
 
 ### **2. Install Dependencies**

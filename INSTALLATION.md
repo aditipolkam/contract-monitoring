@@ -43,6 +43,7 @@ Create and configure environment variable files for the Notification Service. Yo
 Ensure the following variables are set:
 
 ```bash
+./notification-service/.env
 GOOGLE_CLIENT_ID=<your-google-client-id>
 GOOGLE_CLIENT_SECRET=<your-google-client-secret>
 ACCESS_TOKEN=<your-access-token>

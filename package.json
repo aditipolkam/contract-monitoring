@@ -1,0 +1,17 @@
+{
+  "name": "contract-monitoring",
+  "version": "1.0.0",
+  "description": "This documentation outlines a comprehensive system designed to simulate, detect, and respond to security exploits within a banking smart contract environment.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "concurrently \"cd bank-contract && npm i\" \"cd notification-service && npm i && npm run build\" \"cd trigger-pause && npm i && npm run build\"",
+    "start": "concurrently \"cd bank-contract && npx hardhat node\" \"cd notification-service && npm start\" \"cd trigger-pause && npm start\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^8.2.2"
+  }
+}

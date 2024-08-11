@@ -25,11 +25,11 @@ contract Bank_V2 is Initializable, OwnableUpgradeable, PausableUpgradeable {
     function withdraw(uint256 amount) public whenNotPaused {
         require(balances[msg.sender] >= amount, "Insufficient balance");
         balances[msg.sender] -= amount;
+        emit Withdraw(msg.sender, amount);
 
         // fixed
         (bool sent, ) = msg.sender.call{value: amount}("");
         require(sent, "Failed to send Ether");
-        emit Withdraw(msg.sender, amount);
     }
 
     function getBalance() public view returns (uint256) {

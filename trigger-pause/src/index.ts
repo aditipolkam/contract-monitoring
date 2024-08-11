@@ -24,7 +24,7 @@ async function main() {
 
 main()
   .then(() => {
-    console.info('Listening to contract at:', contractAddress);
+    console.info('Event Listener is listening to contract at:', contractAddress);
   })
   .catch((error) => {
     console.error(error);

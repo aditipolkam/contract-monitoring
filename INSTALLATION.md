@@ -10,34 +10,7 @@ cd contract-monitoring
 npm install
 ```
 
-### **2. Install Dependencies**
-
-Navigate to the root directory of the repository and install the required dependencies for all services:
-
-Terminal 1
-
-```bash
-cd bank-contract
-npm install
-```
-
-Terminal 2
-
-```bash
-cd notification-service
-npm install
-```
-
-Terminal 3
-
-```bash
-cd trigger-pause
-npm install
-```
-
-This will install the necessary packages for the `Bank Contract`, `Trigger Pause Service`, and `Notification Service`.
-
-### **3. Configure Environment Variables**
+### **2. Configure Environment Variables**
 
 Create and configure environment variable files for the Notification Service. You may need to create a `.env` file in the `notification-service` or configure your environment variables as needed.
 
@@ -54,53 +27,44 @@ FROM_EMAIL=<your-from-email-address>
 
 You can get client id and client secret from a Google Oauth app, and an access token and refresh token by using this app to create an Oauth flow - [check this](https://developers.google.com/identity/protocols/oauth2/web-server#refresh).
 
-### **4. Configure Smart Contracts**
+### **3. Configure Smart Contracts**
 
 Ensure that the `privateKey` to deploy contract from and `ownerEmail` to notify are correctly set in `global-config.json` or any other configuration files used for deployment.
 
-### **5. Compile and Deploy Smart Contracts**
+### **4. Install Dependencies and Build services**
 
-Navigate to the folder containing your smart contracts (e.g., `bank-contract`) and compile them:
+Navigate to the root directory of the repository and install the required dependencies for all services. This will install the necessary packages for the `Bank Contract`, `Trigger Pause Service`, and `Notification Service`.
 
 ```bash
-npm run build
+npm run setup
 ```
 
-This will compile Typescript script files and will put them into `/dist` and Solidity contract files into `/artifacts`.
+### **5. Run a hardhat node - new terminal in root**
 
 Start a hardhat node in another terminal
 
 ```bash
-npx hardhat node
+npm run node
 ```
 
-### **6. Start the Trigger Pause Service**
-
-Navigate to the `trigger-pause` folder and start the service to begin listening for blockchain events:
-
-```bash
-npm run build
-npm start
-```
-
-### **7. Start the Notification Service**
-
-Navigate to the `notification-service` folder and start the service:
-
-```bash
-npm run build
-npm start
-```
-
-This starts a service on `http://localhost:3000`
-
-### Simulation
+### **6. Deploy the Bank contract**
 
 Comeback to the 1st terminal and deploy the initial version of the `Bank_V1` smart contract:
 
 ```bash
+cd bank-contract
 npx hardhat run --network localhost dist/scripts/deploy.js
 ```
+
+### **6. Start the Trigger Pause Service and Notification Service - new terminal in root**
+
+This starts the notification service on `http://localhost:3000` and starts listening to contract.
+
+```bash
+npm start
+```
+
+### Simulation
 
 Deposit some eth to the contract:
 

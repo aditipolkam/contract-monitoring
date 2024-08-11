@@ -24,7 +24,7 @@
 //     return { result: { email, tokens }, error: null };
 //   } catch (err) {
 //     const error = err as Error;
-//     console.error(0, error.message);
+//     console.error(error.message);
 //     return { result: null, error: error.message };
 //   }
 // };
@@ -33,10 +33,10 @@
 //   return new Promise((resolve) => {
 //     fs.writeFile('credentials.json', JSON.stringify(tokens), (err) => {
 //       if (err) {
-//         console.error(0, err);
+//         console.error(err);
 //         resolve(false);
 //       } else {
-//         console.info(0, 'Oauth Token saved to file.');
+//         console.info('Oauth Token saved to file.');
 //         resolve(true);
 //       }
 //     });

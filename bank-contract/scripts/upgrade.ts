@@ -11,7 +11,7 @@ async function main() {
   const address = await proxy.getAddress();
   // config.set({ bankContractAddress: address });
   config.set({ bankContractName: contractToUpgrade });
-  console.log("Box upgraded: ", address);
+  console.log("Bank upgraded: ", address);
 }
 
 main().catch((error) => {

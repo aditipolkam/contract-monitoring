@@ -57,10 +57,10 @@ const sendMessage = async (mailOptions: IMailOptions) => {
     } as TransportOptions);
 
     const info: SentMessageInfo = await transport.sendMail(mailOptions);
-    console.info(0, 'Email sent: ' + info.response);
+    console.info('Email sent: ' + info.response);
     return true;
   } catch (error) {
-    console.error(0, error);
+    console.error(error);
     return false;
   }
 };

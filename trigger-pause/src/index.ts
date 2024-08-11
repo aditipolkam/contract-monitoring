@@ -22,7 +22,11 @@ async function main() {
   });
 }
 
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+main()
+  .then(() => {
+    console.info('Listening to contract at:', contractAddress);
+  })
+  .catch((error) => {
+    console.error(error);
+    process.exitCode = 1;
+  });

@@ -2,8 +2,8 @@ import { ethers } from 'ethers';
 import ABI from '../data/BankAbi.json';
 import contractConfig from '../config/contract.config';
 
-const adminPrivateKey = contractConfig.configData.privateKey;
-const contractAddress = contractConfig.configData.bankContractAddress;
+const adminPrivateKey = contractConfig.data.privateKey;
+const contractAddress = contractConfig.data.proxyAddress;
 const endPoint = 'http://127.0.0.1:8545';
 
 const pauseContract = async () => {

@@ -4,9 +4,10 @@ import path from "path";
 const filepath = path.resolve(__dirname, "../../../global-config.json");
 
 interface ConfigData {
-  bankContractAddress: string;
+  proxyAddress: string;
   attackContractAddress: string;
   privateKey: string;
+  bankContractName: string;
 }
 
 let configData: ConfigData = {} as ConfigData;
@@ -22,4 +23,4 @@ function set(data: Partial<ConfigData>): void {
   fs.writeFileSync(filepath, JSON.stringify(configData, null, 2));
 }
 
-export default { configData, set };
+export default { data: configData, set };

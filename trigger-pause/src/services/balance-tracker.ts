@@ -3,8 +3,8 @@ import pauseContract from '../helpers/pauseContract';
 import alertOwner from '../helpers/alertOwner';
 import contractConfig from '../config/contract.config';
 
-const contractAddress = contractConfig.configData.bankContractAddress;
-const email = contractConfig.configData.ownerEmail;
+const contractAddress = contractConfig.data.proxyAddress;
+const email = contractConfig.data.ownerEmail;
 
 interface Balances {
   [address: string]: bigint;

@@ -1,12 +1,14 @@
 import { ethers } from "hardhat";
 import config from "./config";
 
-const contractAddress = config.configData.bankContractAddress;
+const contractAddress = config.data.proxyAddress;
+const contractName = config.data.bankContractName;
+
 async function main() {
   const [deployer, signer1, signer2] = await ethers.getSigners();
 
   let bank = await ethers.getContractAt(
-    "contracts/Bank_V1.sol:Bank_V1",
+    contractName,
     contractAddress,
     deployer
   );

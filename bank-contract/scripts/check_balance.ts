@@ -1,8 +1,8 @@
 import hardhat from "hardhat";
 import config from "./config";
 
-const contractAddress = config.configData.bankContractAddress;
-const contractName = "contracts/Bank_V1.sol:Bank_V1";
+const contractAddress = config.data.proxyAddress;
+const contractName = config.data.bankContractName;
 
 async function main() {
   const signers = await hardhat.ethers.getSigners();

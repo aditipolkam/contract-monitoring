@@ -6,7 +6,7 @@ import "@openzeppelin/contracts-upgradeable/utils/PausableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/proxy/utils/Initializable.sol";
 
 contract Bank_V2 is Initializable, OwnableUpgradeable, PausableUpgradeable {
-    mapping(address => uint256) private balances;
+    mapping(address => uint256) public balances;
 
     event Deposit(address indexed _from, uint value);
     event Withdraw(address indexed _receiver, uint value);

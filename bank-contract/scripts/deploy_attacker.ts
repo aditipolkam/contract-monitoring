@@ -1,7 +1,7 @@
 import hardhat from "hardhat";
 import config from "./config";
 
-const bank_v1_contract = config.configData.bankContractAddress;
+const bank_v1_contract = config.data.proxyAddress;
 
 async function main() {
   const attackBankInstance = await hardhat.ethers.getContractFactory(

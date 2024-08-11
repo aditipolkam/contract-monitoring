@@ -4,7 +4,7 @@ import contractConfig from './config/contract.config';
 import { handleDeposit, handleWithdraw } from './services/balance-tracker';
 
 const endPoint = 'http://127.0.0.1:8545';
-const contractAddress = contractConfig.configData.bankContractAddress;
+const contractAddress = contractConfig.data.proxyAddress;
 const provider = new ethers.JsonRpcProvider(endPoint);
 const contract = new ethers.Contract(contractAddress, ABI, provider);
 
@@ -15,6 +15,10 @@ async function main() {
 
   contract.on('Withdraw', async (receiver, value) => {
     handleWithdraw(receiver, value);
+  });
+
+  contract.on('*', async (event) => {
+    // console.log(event);
   });
 }
 

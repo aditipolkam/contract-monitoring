@@ -2,15 +2,16 @@ import { ContractFactory } from "ethers";
 import { ethers, upgrades } from "hardhat";
 import contractconfig from "./config";
 
-const deployerPrivateKey = contractconfig.configData.privateKey;
+const deployerPrivateKey = contractconfig.data.privateKey;
 
 async function main() {
   // Connect the wallet to a provider
   const provider = ethers.provider; // Use the Hardhat provider
   const wallet = new ethers.Wallet(deployerPrivateKey, provider);
+  const contractName = "contracts/Bank_V1.sol:Bank_V1";
 
   const Bank_V1 = (await ethers.getContractFactory(
-    "contracts/Bank_V1.sol:Bank_V1"
+    contractName
   )) as ContractFactory;
 
   console.log("Deploying Bank_V1 contract...");
@@ -22,7 +23,8 @@ async function main() {
   await v1contract.waitForDeployment();
 
   const address = await v1contract.getAddress();
-  contractconfig.set({ bankContractAddress: address });
+  contractconfig.set({ proxyAddress: address });
+  contractconfig.set({ bankContractName: contractName });
 
   console.log("Bank_V1 Contract deployed to:", address);
 }

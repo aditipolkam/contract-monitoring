@@ -2,7 +2,7 @@
 
 This documentation outlines a comprehensive system designed to simulate, detect, and respond to security exploits within a banking smart contract environment.
 
-Try it yourself using the [Installtion Guide](/INSTALLATION.md).
+Try it yourself using the [Installation Guide](/INSTALLATION.md).
 
 ![workflow](/data/workflow.png)
 
@@ -80,7 +80,7 @@ The `notification-service` is responsible for sending alert emails when called f
        ```json
        {
          "message": "Ok",
-         "send": true | false
+         "sent": true
        }
        ```
      - The `send` field contains the result of the email sending operation, which may include details of the sent email or any response from the email service.
@@ -167,6 +167,8 @@ The `trigger-pause` service is a Node.js script that listens to blockchain event
 Additionally, Slither can be integrated directly within the Hardhat project using the `slither .` command. However, due to the integration limitations with Python APIs and the Node.js environment of this project, it was unable to integrate Slither directly into the services.
 
 ```bash
+python -m venv env
+source env/bin/activate
 python3 -m pip install slither-analyzer
 cd bank-contract
 slither .

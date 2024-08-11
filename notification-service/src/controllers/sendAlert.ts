@@ -7,8 +7,8 @@ const sendAlert = async (req: Request, res: Response) => {
   try {
     const mailOptions = emailService.getMailOptions(to, EMAIL_TYPE.WARN, contractAddress, message);
 
-    const send = await emailService.sendMessage(mailOptions);
-    return res.status(200).json({ message: 'Ok', send });
+    const sent = await emailService.sendMessage(mailOptions);
+    return res.status(200).json({ message: 'Ok', sent });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: 'Internal Server Error' });
